@@ -118,3 +118,4 @@ dnn_val_metric_df = compute_classification_metrics(y_true=dnn_val_y, y_pred=dnn_
 ```
 display_side_by_side([dnn_train_metric_df, dnn_test_metric_df, dnn_val_metric_df])
 ```
+![example output](https://github.com/jrytved/classmetrics/blob/main/metrics_screen.png?raw=true)
