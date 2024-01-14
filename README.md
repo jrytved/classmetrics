@@ -4,7 +4,7 @@ Multi-Class Classification Metrics with sklearn
 ![example output](https://github.com/jrytved/classmetrics/blob/main/metrics_screen.png?raw=true)
 
 # Description
-Not all of the classifications metrics included in sklearn.metrics are implemented for multi-class classification. This function computes a per-class accuracy, precision, recall, f1-score, specificity and sensitivity.
+Not all of the classifications metrics included in sklearn.metrics are implemented for multi-class classification. This function computes a per-class accuracy, precision, recall, f1-score and sensitivity for multi-class classifiers.
 
 If return_df, the function returns a dataframe with the metrics. The argument colnames takes the name of the classes. 
 
@@ -25,7 +25,7 @@ from sklearn.metrics import multilabel_confusion_matrix, recall_score, f1_score,
 ```python
 def compute_classification_metrics(y_true: torch.tensor, y_pred: torch.tensor, return_df = False, colnames = None, style = False, title = False):
   """
-  Computes accuracy, precision, recall, F1 score, specificity, sensitivity from multi-class classification predictions and labels.
+  Computes accuracy, precision, recall, F1 score, specificity from multi-class classification predictions and labels.
   """
 
   def color_gradient(val):
@@ -41,29 +41,24 @@ def compute_classification_metrics(y_true: torch.tensor, y_pred: torch.tensor, r
   recall = recall_score(y_true, y_pred, average = None)
   f1 = f1_score(y_true, y_pred, average = None)
 
-  # Accuracy, specificity and sensitivty are not implemented for multi-class tasks, so I'll calculate those from the CFM.
+  # Accuracy and specificity a are not implemented for multi-class tasks, so I'll calculate those from the CFM.
 
-  accuracy, specificity, sensitivity = np.zeros(n_tasks), np.zeros(n_tasks), np.zeros(n_tasks)
+  accuracy, specificity  = np.zeros(n_tasks), np.zeros(n_tasks)
 
   for class_idx in np.arange(n_tasks):
 
     class_cfm = cfm[class_idx]
     tn, fp, fn, tp = class_cfm.ravel()
-
-    # ACCURACY = (TP+TN) / (TP+TN+FP+FN)
+    
     _accuracy = (tp+tn) / (tp+tn+fp+fn)
-    # SPECIFICITY = TN / (FP+TN)
     _specificity = tn / (fp+tn)
-    # SENSITIVITY = TP / (TP+FN)
-    _sensitivity = tp / (tp+fn)
 
     accuracy[class_idx] = _accuracy
     specificity[class_idx] = _specificity
-    sensitivity[class_idx] = _sensitivity
 
   if return_df:
-    metric_names = ["Accuracy", "Precision", "Recall", "F1", "Specificity", "Sensitivity"]
-    stack = np.vstack([accuracy, precision, recall, f1, specificity, sensitivity])
+    metric_names = ["Accuracy", "Precision", "Recall", "F1", "Specificity"]
+    stack = np.vstack([accuracy, precision, recall, f1, specificity])
     df = pd.DataFrame(stack, columns = colnames, index = metric_names).round(decimals=2)
 
     if not style:
@@ -72,7 +67,7 @@ def compute_classification_metrics(y_true: torch.tensor, y_pred: torch.tensor, r
       styled_df = df.style \
           .set_caption(title) \
           .applymap(color_gradient) \
-          .format('{:.1f}') \
+          .format('{:.2f}') \
           .set_table_styles([{
           'selector': 'caption',
           'props': [
@@ -83,7 +78,7 @@ def compute_classification_metrics(y_true: torch.tensor, y_pred: torch.tensor, r
           }])
       return styled_df
   else:
-    return accuracy, precision, recall, f1, specificity, sensitivity
+    return accuracy, precision, recall, f1, specificity
 ```
 
 ## Displaying Metric DataFrames side-by-side.
