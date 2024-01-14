@@ -115,7 +115,7 @@ dnn_test_metric_df = compute_classification_metrics(y_true=dnn_test_y, y_pred=dn
 dnn_val_metric_df = compute_classification_metrics(y_true=dnn_val_y, y_pred=dnn_val_preds_bool, return_df=True, colnames=target_names, style = True, title = "Tbl. 3: DNN Validation Classification Metrics")
 ```
 
-```
+```python
 display_side_by_side([dnn_train_metric_df, dnn_test_metric_df, dnn_val_metric_df])
 ```
 ![example output](https://github.com/jrytved/classmetrics/blob/main/metrics_screen.png?raw=true)
