@@ -1,7 +1,7 @@
 # classmetrics
 Multi-Class Classification Metrics with sklearn
 
-![example output]([http://url/to/img.png](https://github.com/jrytved/classmetrics/blob/main/metrics_screen.png?raw=true))
+![example output](https://github.com/jrytved/classmetrics/blob/main/metrics_screen.png?raw=true)
 
 # Description
 Not all of the classifications metrics included in sklearn.metrics are implemented for multi-class classification. This function computes a per-class accuracy, precision, recall, f1-score, specificity and sensitivity.
