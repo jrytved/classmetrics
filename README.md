@@ -18,11 +18,11 @@ If used in a notebook the secondary function display_side_by_side, can be used t
 
 ## Computing Metrics
 
-```
+```python
 from sklearn.metrics import multilabel_confusion_matrix, recall_score, f1_score, precision_score, accuracy_score
 ```
 
-```
+```python
 def compute_classification_metrics(y_true: torch.tensor, y_pred: torch.tensor, return_df = False, colnames = None, style = False, title = False):
   """
   Computes accuracy, precision, recall, F1 score, specificity, sensitivity from multi-class classification predictions and labels.
@@ -88,7 +88,7 @@ def compute_classification_metrics(y_true: torch.tensor, y_pred: torch.tensor, r
 
 ## Displaying Metric DataFrames side-by-side.
 
-```
+```python
 def display_side_by_side(dfs:list, tablespacing=5):
     """Display tables side by side to save vertical space
     Input:
@@ -109,7 +109,7 @@ def display_side_by_side(dfs:list, tablespacing=5):
 
 # Examples
 
-```
+```python
 dnn_train_metric_df = compute_classification_metrics(y_true=dnn_train_y, y_pred=dnn_train_preds_bool, return_df=True, colnames=target_names, style = True, title = "Tbl. 1: DNN Training Classification Metrics")
 dnn_test_metric_df = compute_classification_metrics(y_true=dnn_test_y, y_pred=dnn_test_preds_bool, return_df=True, colnames=target_names, style = True, title = "Tbl. 2: DNN Test Classification Metrics")
 dnn_val_metric_df = compute_classification_metrics(y_true=dnn_val_y, y_pred=dnn_val_preds_bool, return_df=True, colnames=target_names, style = True, title = "Tbl. 3: DNN Validation Classification Metrics")
