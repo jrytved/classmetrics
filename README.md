@@ -4,13 +4,13 @@ Multi-Class Classification Metrics with sklearn
 ![example output](https://github.com/jrytved/classmetrics/blob/main/metrics_screen.png?raw=true)
 
 # Description
-Not all of the classifications metrics included in sklearn.metrics are implemented for multi-class classification. This function computes a per-class accuracy, precision, recall, f1-score and sensitivity for multi-class classifiers.
+Not all of the classifications metrics included in sklearn.metrics are implemented for multi-class classification. This function computes a per-class accuracy, precision, recall, f1-score and specificity for multi-class classifiers.
 
 If return_df, the function returns a dataframe with the metrics. The argument colnames takes the name of the classes. 
 
 If return_df and style,  the function returns a styled dataframe with the string passed to title as the caption. All cells are colored by a red-green gradient in the range (0,1)
 
-Otherwise the function returns accuracy, precision, recall, f1, specificity, sensitivity, with all being 1d numpy arrays of size n_classes. 
+Otherwise the function returns accuracy, precision, recall, f1 and specificity with all being 1d numpy arrays of size n_classes. 
 
 If used in a notebook the secondary function display_side_by_side, can be used to render several classification metric dataframes as HTML side-by-side.
 
